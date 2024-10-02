@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE-III-iv</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url(Banner/2.jpg) no-repeat center center fixed;
+            background-size: flex
+        }
+
+        header {
+            text-align: right;
+            padding: 20px 0;
+            background-color: rgb(146, 146, 146);
+            background-image: url('Banner/1.jpg');
+            background-position: left;
+            position: relative;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5em;
+            margin: 0;
+            color: #000000;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            margin-top: 1px;
+        }
+
+        .slider img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+
+        .intro-section {
+            text-align: center;
+            padding: 60px 20px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .intro-section h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #1d1d1f;
+        }
+
+        .intro-section p {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn {
+            background-color: #dd00ff;
+            color: rgb(0, 0, 0);
+            padding: 14px 28px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.5s ease;
+            box-shadow: 0 50px 15px rgba(0, 0, 0, 0.10);
+            margin: 10px 0;
+        }
+
+        .btn:hover {
+            background-color: #ffffff;
+            transform: scale(1.05);
+        }
+
+        .excel-section {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .excel-section h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #1d1d1f;
+        }
+
+        .bus-gallery {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .bus-gallery h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #1d1d1f;
+        }
+
+        .bus-gallery img {
+            width: 80%;
+            max-width: 600px;
+            margin: 100x;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bus-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .bus-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: #000000;
+        }
+
+        .bus-gallery video {
+            width: 45%;
+            padding-left: 10px;
+            max-width: 300px;
+            margin: 50px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bus-gallery video:hover {
+            transform: scale(1.05);
+        }
+
+        .iv-memories {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .iv-memories h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 36px;
+            color: #1d1d1f;
+            margin: 0;
+        }
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 45%;
+            padding-left: 10px;
+            max-width: 300px;
+            margin: 50px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .room-gallery {
+            text-align: center;
+            padding: 60px 20px;
+            display: none; /* Initially hidden */
+        }
+
+        .room-gallery h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 36px;
+            color: #1d1d1f;
+            margin: 0;
+        }
+
+        .room-gallery .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .room-gallery img {
+            width: 300px;
+            height: auto;
+            margin: 10px;
+            border-radius: 7px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.9s;
+        }
+
+        .room-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: red;
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            border: none;
+            margin-top: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            background-color: rgb(0, 0, 0);
+            color: #ffffff;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .intro-section h2 {
+                font-size: 1.5em;
+            }
+
+            .intro-section p {
+                font-size: 1em;
+            }
+
+            .btn {
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                background: url(Banner/2.jpg) no-repeat center center fixed;
+                background-size: cover;
+            }
+
+            header h1 {
+                font-size: 1.5em;
+            }
+
+            .slider {
+                height: 200px;
+            }
+
+            .intro-section h2 {
+                font-size: 1.2em;
+            }
+
+            .intro-section p {
+                font-size: 0.9em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .iv-memories h2 {
+                font-size: 1.5em;
+            }
+
+            .iv-memories img {
+                width: 80%;
+                height: auto;
+                margin: 20px auto;
+            }
+        }
+
+        /* Background image stretching for larger resolutions */
+        @media (min-width: 1280px) {
+            body {
+                background: url(Banner/2.jpg) no-repeat center center fixed;
+                background-size: cover;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            body {
+                background: url(Banner/2.jpg) no-repeat center center fixed;
+                background-size: cover;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>CSE III INDUSTRIAL VISITING</h1>
+</header>
+
+<div class="slider">
+    <img src="img/1.jpg" class="active" alt="Beautiful Destination 1">
+    <img src="img/2.jpg" alt="Beautiful Destination 2">
+    <img src="img/3.jpg" alt="Beautiful Destination 3">
+    <img src="img/5.jpg" alt="">
+</div>
+
+<section class="intro-section">
+    <h2>Industrial Visit Highlights</h2>
+    <p>Witness the highlights and memorable moments from our educational industrial visit. We covered various industries
+        in Bangalore, learning from the experts.</p>
+    <a href="javascript:void(0)" class="btn" onclick="showExcel()">Excel Data</a>
+    <a href="javascript:void(0)" class="btn" onclick="showBusGallery()">Bus Gallery</a>
+    <a href="javascript:void(0)" class="btn" onclick="showIVMemories()">IV Memories</a>
+    <a href="javascript:void(0)" class="btn" onclick="showRoomGallery()">Room Gallery</a>
+</section>
+
+<!-- Excel Section -->
+<section class="excel-section" id="excelSection" style="display: block;">
+    <h2>Finance Overview for Your Dream Tour</h2>
+    <iframe src="https://1drv.ms/x/c/33ebc37e914e2e2b/IQSjl50Jk_3lRYKfZ24Y2b56AULMT7B6dGg31J4rf5wiIVw?em=2&amp;wdAllowInteractivity=False&amp;wdHideGridlines=True&amp;wdHideHeaders=True&amp;wdDownloadButton=True&amp;wdInConfigurator=True"></iframe>
+</section>
+
+<!-- Bus Gallery -->
+<section class="bus-gallery">
+    <h2>Bus Gallery</h2>
+    <div class="gallery">
+        <img src="bus-images/bus1.jpg" alt="Bus Image 1">
+        <img src="bus-images/bus2.jpg" alt="Bus Image 2">
+        <img src="bus-images/bus9.jpg" alt="Bus Image 2">
+
+    </div>
+    <div>
+        <video src="bus-images/bus3.mp4" controls width="300" alt="Bus video 3"></video>
+        <video src="bus-images/bus4.mp4" controls width="300" alt="Bus Video 4"></video>
+        <video src="bus-images/bus5.mp4" controls width="300" alt="Bus Video 4"></video>
+        <video src="bus-images/bus6.mp4" controls width="300" alt="Bus Video 4"></video>
+        <video src="bus-images/bus7.mp4" controls width="300" alt="Bus Video 4"></video>
+        <video src="bus-images/bus8.mp4" controls width="300" alt="Bus Video 4"></video>
+    </div>
+</section>
+
+<!-- IV Memories -->
+<section class="iv-memories">
+    <h2>IV Memories</h2>
+    <div class="gallery">
+        <img src="iv-images/memory1.jpg" alt="IV Memory 1">
+        <img src="iv-images/memory2.jpg" alt="IV Memory 2">
+        <img src="iv-images/memory3.jpg" alt="IV Memory 3">
+    </div>
+</section>
+
+<!-- Room Gallery -->
+<section class="room-gallery">
+    <h2>Room Gallery</h2>
+    <div class="gallery">
+        <img src="room/room1.jpg" alt="Room Image 1">
+        <img src="room/room2.jpg" alt="Room Image 2">
+        <img src="room/room3.jpg" alt="Room Image 3">
+        <img src="room/room4.jpg" alt="Room Image 4">
+        <img src="room/room6.jpg" alt="Room Image 5">
+        <img src="room/room5.jpg" alt="Room Image 6">
+        <img src="room/room7.jpg" alt="Room Image 7">
+        <img src="room/room8.jpg" alt="Room Image 9">
+        <img src="room/room9.jpg" alt="Room Image 10">
+        <img src="room/room10.jpg" alt="Room Image 4">
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 CSE-III IV Memories | All Rights Reserved</p>
+</footer>
+
+<script>
+    function showExcel() {
+        document.querySelector('.excel-section').style.display = 'block';
+        document.querySelector('.bus-gallery').style.display = 'none';
+        document.querySelector('.iv-memories').style.display = 'none';
+        document.querySelector('.room-gallery').style.display = 'none';
+    }
+
+    function showBusGallery() {
+        document.querySelector('.excel-section').style.display = 'none';
+        document.querySelector('.bus-gallery').style.display = 'block';
+        document.querySelector('.iv-memories').style.display = 'none';
+        document.querySelector('.room-gallery').style.display = 'none';
+    }
+
+    function showIVMemories() {
+        document.querySelector('.excel-section').style.display = 'none';
+        document.querySelector('.bus-gallery').style.display = 'none';
+        document.querySelector('.iv-memories').style.display = 'block';
+        document.querySelector('.room-gallery').style.display = 'none';
+    }
+
+    function showRoomGallery() {
+        document.querySelector('.excel-section').style.display = 'none';
+        document.querySelector('.bus-gallery').style.display = 'none';
+        document.querySelector('.iv-memories').style.display = 'none';
+        document.querySelector('.room-gallery').style.display = 'block';
+    }
+
+    // Slider functionality
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slider img');
+
+    setInterval(() => {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].classList.add('active');
+    }, 3000);
+</script>
+</body>
+</html>
