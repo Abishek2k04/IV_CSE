@@ -44,6 +44,7 @@
             position: absolute;
             width: 100%;
             height: 100%;
+            padding-top: 1px;
             object-fit: cover;
             opacity: 0;
             transition: opacity 1s ease;
@@ -117,6 +118,23 @@
             background-color: rgba(255, 255, 255, 0.682);
             transform: scale(1.05);
             box-shadow: 0 0 10px 5px rgb(0, 0, 0);
+        }
+        .scrolling-dialogue {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+            margin-top: 20PX;
+        }
+
+        #dialogue {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 18px;
+            color: #ff0000;
+            padding-left: 100%;
+            animation: scroll-left 25s linear infinite;
+            text-shadow: 0 0 5px rgb(255, 0, 0), 0 0 10px rgba(0, 0, 255, 0), 0 0 15px #00f;
         }
 
         .btn {
@@ -197,6 +215,11 @@
 
         .bus-gallery video:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 15px 5px white;
+
+        }
+        .gallery video:hover{
+            box-shadow: 0 0 15px 5px white;
         }
 
         .iv-memories {
@@ -210,6 +233,12 @@
             color: #1d1d1f;
             margin: 0;
         }
+        .iv-memories video{
+            max-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
 
         .gallery {
             display: flex;
@@ -259,10 +288,10 @@
         }
 
         .room-gallery img {
-            width: 50%;
-            height: fit-content;
+            width: 100%;
+            height: auto;
             max-width: 300px;
-            margin: 10px;
+            margin: 5px;
             border-radius: 7px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.4s;
@@ -296,7 +325,6 @@
             margin: 0;
             font-size: 1em;
         }
-
         /* Media Queries for Responsiveness */
         @media (max-width: 768px) {
             header h1 {
@@ -380,7 +408,7 @@
                 margin: 10px 0;
             }
             .bus-gallery img {
-                width: 90%; /* Responsive width for smaller screens */
+                width: 100%; /* Responsive width for smaller screens */
                 height: auto; /* Maintain aspect ratio */
                 margin: 10px 0;
                 border-radius: 10px; /* Optional: Add rounded corners for a smoother look */
@@ -430,7 +458,10 @@
         }
 
         @media (min-width: 1920px) {
-            .bus-gallery,
+            .bus-gallery{
+                position: absolute;
+            }
+
             .iv-memories,
             .excel-gallery,
             .room-gallery {
@@ -450,11 +481,18 @@
                 border-radius: 5px;
                 box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* More shadow for a bolder look */
     }
-
     /* Room-specific optimizations */
             .room {
                 padding: 50px;
                 font-size: 1.4em;
+            }
+        }
+        @keyframes scroll-left{
+            0%{
+                transform: translateX(100%);
+            }
+            100%{
+                transform: translateX(-100%);
             }
         }
     </style>
@@ -470,20 +508,31 @@
     <img src="img/2.jpg" alt="Beautiful Destination 2">
     <img src="img/3.jpg" alt="Beautiful Destination 3">
     <img src="img/5.jpg" alt="">
+    <img src="img/6.jpg" alt="">
+    <img src="img/7.jpg" alt="">
     <button class="prev" onclick="changeSlide(-1)">Previous</button>
     <button class="next" onclick="changeSlide(1)">Next</button>
 </div>
 
 <section class="intro-section">
     <h2>Industrial Visit Highlights</h2>
-    <section class="intro-sectionh21"><p>Witness the highlights and memorable moments from our educational industrial visit. We covered various industries
-        in Bangalore, learning from the experts.</p></section>
+    <section class="intro-sectionh21">
+        <p>Witness the highlights and memorable moments from our educational industrial visit. We covered various industries
+            in Bangalore, learning from the experts.</p>
+    </section>
+    
     <a href="javascript:void(0)" class="btn" onclick="showExcel()">Excel Data</a>
     <a href="javascript:void(0)" class="btn" onclick="showBusGallery()">Bus Gallery</a>
     <a href="javascript:void(0)" class="btn" onclick="showIVMemories()">IV Memories</a>
     <a href="javascript:void(0)" class="btn" onclick="showRoomGallery()">Room Gallery</a>
     <video src="Banner/int.mp4" controls width="300" alt="Intro Video 1"></video>
+    
+    <!-- Scrolling Dialogue Section with Glow Effect -->
+    <div class="scrolling-dialogue">
+        <div id="dialogue">Memorable moments from our visit: Exploring the industries, learning from experts, and creating lasting memories together! </div>
+    </div>
 </section>
+
 
 <!-- Excel Section -->
 <section class="excel-section" id="excelSection" style="display: block;">
@@ -517,6 +566,9 @@
         <img src="iv-images/memory1.jpg" alt="IV Memory 1">
         <img src="iv-images/memory2.jpg" alt="IV Memory 2">
         <img src="iv-images/memory3.jpg" alt="IV Memory 3">
+        <div>
+            <video src="iv-images/memory5.mp4" controls width="300"></video>
+        </div>
     </div>
 </section>
 
