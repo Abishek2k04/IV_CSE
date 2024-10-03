@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSE-III-iv</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url(Banner/2.jpg) no-repeat center center fixed;
+            background-size: flex
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: rgb(146, 146, 146);
+            background-image: url('Banner/1.jpg');
+            background-size: cover; /* Make the background image cover the entire header */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Prevent the image from repeating */
+            position: relative;
+            z-index: 10;
+        }
+        header h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5em;
+            margin: 0;
+            color: #000000;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .slider img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            padding-top: 1px;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .slider img.active {
+            opacity: 1;
+        }
+        .slider button{
+            font-family: 'Oswald', sans-serif;
+            position: absolute;
+            top: 10%;
+            transform: translateY(60%);
+            background-color: rgba(255, 255, 255, 0.5);
+            color: rgb(0, 0, 0);
+            cursor: pointer;
+            border-radius: 25px;
+        }
+        .slider .prev{
+            left: 10px;
+        }
+        .slider .next{
+            right: 10px;
+        }
+
+        .slider button{
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow:  0 0 2px 1.5px rgba(255, 255, 255, 0.7), 0 0 2.5px 1.1px rgb(112, 112, 112), 0 0 50px 30px rgba(255, 140, 0, 0.3);
+        }
+
+        .intro-section {
+            text-align: center;
+            padding: 60px 20px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .intro-section h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #1d1d1f;
+        }
+
+        .intro-section p {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.2em;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .intro-section video {
+            width: 45%;
+            padding-right: 10px;
+            max-width: 300px;
+            height: fit-content;
+            margin: 50px;
+            border-radius: 20px;
+            border-color: #000000;
+            border-width: 5px;
+            box-shadow: 0 2px 5px rgba(255, 0, 0, 0.1);
+            animation: smooth-motion 5s ease-in-out infinite;
+        }
+        .intro-sectionh21  :hover{
+            background-color: rgba(255, 255, 255, 0.682);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px 5px rgb(0, 0, 0);
+        }
+        .scrolling-dialogue {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+            margin-top: 20PX;
+        }
+
+        #dialogue {
+            position: absolute;
+            white-space: nowrap;
+            font-size: 18px;
+            color: #ff0000;
+            padding-left: 100%;
+            animation: scroll-left 25s linear infinite;
+            text-shadow: 0 0 5px rgb(255, 0, 0), 0 0 10px rgba(0, 0, 255, 0), 0 0 15px #00f;
+        }
+
+        .btn {
+            font-family: 'Oswald', sans-serif;
+            background-color: #dd00ff;
+            color: rgb(0, 0, 0);
+            padding: 10px 18px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 50px 15px rgba(0, 0, 0, 0.10);
+            margin: 20px 10px;
+        }
+
+        .btn:hover {
+            background-color: #ff6a00;
+            transform: scale(1.05);
+            box-shadow:  0 0 10px 5px rgba(255, 0, 0, 0.7), 0 0 30px 15px rgb(255, 196, 0), 0 0 50px 30px rgba(255, 140, 0, 0.3);
+            animation: flicker 0.2s infinite alternate;
+        }
+
+        .excel-section {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .excel-section h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #1d1d1f;
+        }
+
+        .bus-gallery {
+            display: none;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .bus-gallery h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2em;
+            margin-bottom: 10px;
+            color: #1d1d1f;
+        }
+
+        .bus-gallery img {
+            width: 80%;
+            max-width: 600px;
+            margin: 100x;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bus-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 60px 20px;
+        }
+
+        .bus-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: #000000;
+        }
+
+        .bus-gallery video {
+            width: 45%;
+            padding-left: 10px;
+            max-width: 300px;
+            margin: 50px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .bus-gallery video:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px 5px white;
+
+        }
+        .gallery video:hover{
+            box-shadow: 0 0 15px 5px white;
+        }
+
+        .iv-memories {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .iv-memories h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 36px;
+            color: #1d1d1f;
+            margin: 0;
+        }
+        .iv-memories video{
+            max-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .gallery img {
+            width: 45%;
+            padding-left: 10px;
+            max-width: 300px;
+            margin: 10px;
+            border-radius: 7px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: trainsform 0.9s;
+            display: block;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: red;
+            box-shadow:  0 0 10px 5px rgb(255, 255, 255), 0 0 30px 15px rgba(255, 255, 255, 0.678), 0 0 50px 30px rgba(255, 140, 0, 0.3);
+            animation: flicker 0.2s infinite alternate;
+        }
+
+        .room-gallery {
+            text-align: center;
+            padding: 60px 20px;
+            display: none; /* Initially hidden */
+            justify-content: 20px;
+            flex-wrap: wrap;
+        }
+
+        .room-gallery h2 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 36px;
+            color: #1d1d1f;
+            margin: 0;
+            text-align: center;
+        }
+
+        .room-gallery .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .room-gallery img {
+            width: 100%;
+            height: auto;
+            max-width: 300px;
+            margin: 5px;
+            border-radius: 7px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s;
+            display: block;
+        }
+
+        .room-gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: red;
+            box-shadow:  0 0 10px 5px rgb(255, 255, 255), 0 0 30px 15px rgba(255, 255, 255, 0.678), 0 0 50px 30px rgba(255, 140, 0, 0.3);
+            animation: flicker 0.2s infinite alternate;
+
+        }
+
+        iframe {
+            width: 100%;
+            max-width: 1200px;
+            height: 600px;
+            border: none;
+            margin-top: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 20px;
+            background-color: rgb(0, 0, 0);
+            color: #ffffff;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 1em;
+        }
+        /* Media Queries for Responsiveness */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .intro-section h2 {
+                font-size: 1.5em;
+            }
+
+            .intro-section p {
+                font-size: 1em;
+            }
+
+            .btn {
+                font-size: 1em;
+            }
+            .bus-gallery{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin: 20px 0;
+            }
+            .bus-gallery img {
+                width: 45%; /* Responsive width for smaller screens */
+                height: auto; /* Maintain aspect ratio */
+                margin: 10px 0;
+                border-radius: 10px; /* Optional: Add rounded corners for a smoother look */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for a subtle effect */
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                background: url(Banner/2.jpg) no-repeat center center fixed;
+                background-size: cover;
+            }
+
+            header h1 {
+                font-size: 1.4em;
+                align-self: auto;
+            }
+            .excel-section{
+                width: 90;
+                height: auto;
+                margin: 10px 0;
+                border-radius: 10px;
+                box-shadow: inset0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            .slider {
+                height: 100px;
+            }
+
+            .intro-section h2 {
+                font-size: 1.9em;
+            }
+
+            .intro-section p {
+                font-size: 0.9em;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+            }
+
+            .iv-memories h2 {
+                font-size: 1.5em;
+            }
+
+            .iv-memories img {
+                width: 80%;
+                height: auto;
+                margin: 20px auto;
+            }
+            .bus-gallery{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                margin: 10px 0;
+            }
+            .bus-gallery img {
+                width: 100%; /* Responsive width for smaller screens */
+                height: auto; /* Maintain aspect ratio */
+                margin: 10px 0;
+                border-radius: 10px; /* Optional: Add rounded corners for a smoother look */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for a subtle effect */
+            }
+            .bus-gallery video{
+                width: 90%;
+                height: auto;
+                margin: 10px 0;
+                border-radius: 10px;
+                box-shadow: inset0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        /* Background image stretching for larger resolutions */
+        @media (min-width: 1280px) {
+            body {
+                background: url(Banner/2.jpg) no-repeat center center fixed;
+                background-size: cover;
+            }
+            .bus-gallery h2{
+                margin-left: 10px;
+            }
+            .bus-gallery,
+            .iv-memories,
+            .excel-section
+            .room-gallery{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                margin: 30px 0;
+            }
+            .bus-gallery img,
+            .iv-memories img,
+            .excel-gallery img,
+            .room-gallery img {
+                width: 30%; /* Images take up 30% width for a more spacious look */
+                height: auto;
+                margin: 15px;
+                border-radius: 10px;
+                box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Slightly larger shadow for bigger screens */
+            }
+            .room {
+                padding: 40px;
+                font-size: 1.2em;
+            }
+        }
+
+        @media (min-width: 1920px) {
+            .bus-gallery{
+                position: absolute;
+            }
+
+            .iv-memories,
+            .excel-gallery,
+            .room-gallery {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                margin: 40px 0;
+              }
+
+            .bus-gallery img,
+            .iv-memories img,
+            .excel-gallery img,
+            .room-gallery img {
+                width: 50%; /* Images take up less width for ultra-wide screens */
+                height: auto;
+                margin: 10px;
+                border-radius: 5px;
+                box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* More shadow for a bolder look */
+    }
+    /* Room-specific optimizations */
+            .room {
+                padding: 50px;
+                font-size: 1.4em;
+            }
+        }
+        @keyframes scroll-left{
+            0%{
+                transform: translateX(100%);
+            }
+            100%{
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>CSE III INDUSTRIAL VISITING</h1>
+</header>
+
+<div class="slider">
+    <img src="img/1.jpg" class="active" alt="Beautiful Destination 1">
+    <img src="img/2.jpg" alt="Beautiful Destination 2">
+    <img src="img/3.jpg" alt="Beautiful Destination 3">
+    <img src="img/5.jpg" alt="">
+    <img src="img/6.jpg" alt="">
+    <img src="img/7.jpg" alt="">
+    <button class="prev" onclick="changeSlide(-1)">Previous</button>
+    <button class="next" onclick="changeSlide(1)">Next</button>
+</div>
+
+<section class="intro-section">
+    <h2>Industrial Visit Highlights</h2>
+    <section class="intro-sectionh21">
+        <p>Witness the highlights and memorable moments from our educational industrial visit. We covered various industries
+            in Bangalore, learning from the experts.</p>
+    </section>
+    
+    <a href="javascript:void(0)" class="btn" onclick="showExcel()">Excel Data</a>
+    <a href="javascript:void(0)" class="btn" onclick="showBusGallery()">Bus Gallery</a>
+    <a href="javascript:void(0)" class="btn" onclick="showIVMemories()">IV Memories</a>
+    <a href="javascript:void(0)" class="btn" onclick="showRoomGallery()">Room Gallery</a>
+    <video src="Banner/int.mp4" controls width="300" alt="Intro Video 1"></video>
+    
+    <!-- Scrolling Dialogue Section with Glow Effect -->
+    <div class="scrolling-dialogue">
+        <div id="dialogue">Memorable moments from our visit: Exploring the industries, learning from experts, and creating lasting memories together! </div>
+    </div>
+</section>
+
+
+<!-- Excel Section -->
+<section class="excel-section" id="excelSection" style="display: block;">
+    <h2>Finance Overview for Your Dream Tour</h2>
+    <iframe src="https://1drv.ms/x/c/33ebc37e914e2e2b/IQSjl50Jk_3lRYKfZ24Y2b56AULMT7B6dGg31J4rf5wiIVw?em=2&amp;wdAllowInteractivity=False&amp;wdHideGridlines=True&amp;wdHideHeaders=True&amp;wdDownloadButton=True&amp;wdInConfigurator=True"></iframe>
+</section>
+
+<!-- Bus Gallery -->
+<section class="bus-gallery">
+    <h2>Bus Gallery</h2>
+    <div class="gallery">
+        <img src="bus-images/bus1.jpg" alt="Bus Image 1">
+        <img src="bus-images/bus2.jpg" alt="Bus Image 2">
+        <img src="bus-images/bus9.jpg" alt="Bus Image 2">
+
+    </div>
+    <div>
+        <video src="bus-images/bus3.mp4" controls width="300" alt="Bus video 3"></video>
+        <video src="bus-images/bus4.mp4" controls width="300" alt="Bus Video 4"></video>
+        <video src="bus-images/bus5.mp4" controls width="300" alt="Bus Video 4"></video>
+        <video src="bus-images/bus6.mp4" controls width="300" alt="Bus Video 4"></video>
+        <video src="bus-images/bus7.mp4" controls width="300" alt="Bus Video 4"></video>
+        <video src="bus-images/bus8.mp4" controls width="300" alt="Bus Video 4"></video>
+    </div>
+</section>
+
+<!-- IV Memories -->
+<section class="iv-memories">
+    <h2>IV Memories</h2>
+    <div class="gallery">
+        <img src="iv-images/memory1.jpg" alt="IV Memory 1">
+        <img src="iv-images/memory2.jpg" alt="IV Memory 2">
+        <img src="iv-images/memory3.jpg" alt="IV Memory 3">
+        <div>
+            <video src="iv-images/memory5.mp4" controls width="300"></video>
+        </div>
+    </div>
+</section>
+
+<!-- Room Gallery -->
+<section class="room-gallery">
+    <h2>Room Gallery</h2>
+    <div class="gallery">
+        <img src="room/room1.jpg" alt="Room Image 1">
+        <img src="room/room2.jpg" alt="Room Image 2">
+        <img src="room/room3.jpg" alt="Room Image 3">
+        <img src="room/room4.jpg" alt="Room Image 4">
+        <img src="room/room6.jpg" alt="Room Image 5">
+        <img src="room/room5.jpg" alt="Room Image 6">
+        <img src="room/room7.jpg" alt="Room Image 7">
+        <img src="room/room8.jpg" alt="Room Image 9">
+        <img src="room/room9.jpg" alt="Room Image 10">
+        <img src="room/room10.jpg" alt="Room Image 4">
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 CSE-III IV Memories | All Rights Reserved</p>
+</footer>
+
+<script>
+    function showExcel() {
+        document.querySelector('.excel-section').style.display = 'block';
+        document.querySelector('.bus-gallery').style.display = 'none';
+        document.querySelector('.iv-memories').style.display = 'none';
+        document.querySelector('.room-gallery').style.display = 'none';
+    }
+
+    function showBusGallery() {
+        document.querySelector('.excel-section').style.display = 'none';
+        document.querySelector('.bus-gallery').style.display = 'block';
+        document.querySelector('.iv-memories').style.display = 'none';
+        document.querySelector('.room-gallery').style.display = 'none';
+    }
+
+    function showIVMemories() {
+        document.querySelector('.excel-section').style.display = 'none';
+        document.querySelector('.bus-gallery').style.display = 'none';
+        document.querySelector('.iv-memories').style.display = 'block';
+        document.querySelector('.room-gallery').style.display = 'none';
+    }
+
+    function showRoomGallery() {
+        document.querySelector('.excel-section').style.display = 'none';
+        document.querySelector('.bus-gallery').style.display = 'none';
+        document.querySelector('.iv-memories').style.display = 'none';
+        document.querySelector('.room-gallery').style.display = 'block';
+    }
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slider img');
+    
+    function changeSlide(direction){
+        slides[currentSlide].classList.remove('active');
+
+        currentSlide = (currentSlide + direction + slides.length) % slides.length;
+
+        slides[currentSlide].classList.add('active');
+
+    }
+</script>
+</body>
+</html>
